@@ -1,0 +1,46 @@
+# Template file for 'digimend-kernel-drivers'
+pkgname=digimend-kernel-drivers
+version=13.0.0
+revision=1
+archs="x86_64"
+_gitrev="f3c7c7f1179fc786a8e5aad027d4db904c31b42c"  # v13
+build_style=
+hostmakedepends="git"
+makedepends=""
+depends="dkms linux-headers"
+short_desc="Collection of graphics tablet drivers for the Linux kernel"
+maintainer="askoth <askoth@gmail.com>"
+license="GPL-2.0"
+homepage="https://github.com/DIGImend/digimend-kernel-drivers"
+changelog="https://github.com/DIGImend/digimend-kernel-drivers/releases"
+
+triggers="dkms"
+
+do_fetch() {
+	rm -rf ${wrksrc}
+	git clone https://github.com/DIGImend/digimend-kernel-drivers.git ${wrksrc}
+	cd ${wrksrc}
+	git checkout ${_gitrev}
+}
+
+do_install() {
+    vmkdir usr/src/digimend-${version}/
+
+    vcopy hid-*.c usr/src/digimend-${version}/
+    vcopy hid-*.h usr/src/digimend-${version}/
+    vcopy Makefile usr/src/digimend-${version}/
+    vcopy dkms.conf usr/src/digimend-${version}/
+    vcopy compat.h usr/src/digimend-${version}/
+    if [ -d usbhid ]; then
+        vcopy usbhid usr/src/digimend-${version}/
+    fi
+
+    if [ -f udev.rules ]; then
+        vinstall udev.rules 644 usr/lib/udev/rules.d 90-digimend.rules
+    fi
+    if [ -f hid-rebind ]; then
+        # hid-rebind is often a script, check if it's allowed in /usr/lib/udev
+        # If pkglint complains about /usr/lib/udev too, you may need to omit it or move it to a separate -utils package
+        vinstall hid-rebind 755 usr/lib/udev/
+    fi
+}
