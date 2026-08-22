@@ -1,0 +1,23 @@
+# Template file for 'headsetcontrol'
+pkgname=headsetcontrol
+version=4.0.0
+revision=1
+archs="x86_64"
+_gitrev="7868482a2494eeea80ad2245e95f6bb84b6cb336"  # tag 4.0.0
+build_style=cmake
+hostmakedepends="git"
+makedepends="hidapi-devel"
+depends="hidapi"
+short_desc="USB headset control"
+maintainer="askoth <askoth@gmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/Sapd/HeadsetControl"
+changelog="https://github.com/Sapd/HeadsetControl/releases"
+
+do_fetch() {
+	rm -rf ${wrksrc}
+	git clone https://github.com/Sapd/HeadsetControl.git ${wrksrc}
+	cd ${wrksrc}
+	git checkout ${_gitrev}
+}
+
