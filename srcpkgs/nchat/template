@@ -1,0 +1,36 @@
+# Template file for 'headsetcontrol'
+pkgname=nchat
+version=5.18.20
+revision=1
+archs="x86_64"
+build_style=""
+short_desc="Whatsapp, telegram and signal chat"
+maintainer="askoth <askoth@gmail.com>"
+hostmakedepends="curl tar"
+license="GPL-3.0"
+homepage="https://github.com/d99kris/nchat"
+changelog="https://github.com/d99kris/nchat/releases"
+dist="https://github.com/d99kris/nchat/releases/download/v${version}/nchat-${version}-linux-x86_64-glibc.tar.gz"
+checksum="sha256:585471728ee5fbc3ecb08ca27eea6b1167b44611f73e2401e49fcfc5bd366f7a"
+# The error non-PIE executable found in PIE build occurs because Void Linux enforces Position Independent Executable (PIE) security hardening by default.  Since nchat is a pre-compiled binary (you are extracting a tarball, not compiling from source), it was built by the upstream developer without PIE flags, causing the xbps-src hook to reject it.
+nopie=yes
+
+# could not make this work with fetch. I don't know why
+do_fetch() {
+	curl -L -O https://github.com/d99kris/nchat/releases/download/v${version}/nchat-${version}-linux-x86_64-glibc.tar.gz
+
+	# checks checksum manually
+	echo "${checksum:7} nchat-${version}-linux-x86_64-glibc.tar.gz" | sha256sum --check
+}
+
+do_extract() {
+	tar -xzf ../nchat-${version}-linux-x86_64-glibc.tar.gz -C .
+}
+
+do_install() {
+	vbin nchat-${version}-linux-x86_64-glibc/bin/nchat
+
+	vdoc nchat-${version}-linux-x86_64-glibc/LICENSE
+	vdoc nchat-${version}-linux-x86_64-glibc/THIRD_PARTY_LICENSES
+
+}
