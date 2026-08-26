@@ -1,0 +1,55 @@
+# Template file for 'noctalia'
+pkgname=noctalia
+version=5.0.0.beta.9
+revision=1
+archs="x86_64"
+_gitrev="a064c063f204518619b8c032c944138a0349966b"  # tag 5.0.0-beta.9
+build_style=meson
+hostmakedepends="git just"
+makedepends=(
+	meson ninja pkg-config git
+	wayland-devel wayland-protocols libepoxy-devel
+	MesaLib-devel libglvnd-devel cairo-devel
+	pango-devel fontconfig-devel freetype-devel
+	harfbuzz-devel libxkbcommon-devel pipewire-devel wireplumber-devel
+	libsecret-devel libsodium-devel
+	libcurl-devel pam-devel libwebp-devel libjxl-devel libsndfile-devel
+	basu-devel sdbus-c++-devel
+	libmd4c-devel tomlplusplus-devel libical-devel
+	json-c++ stb
+	polkit-devel librsvg-devel libqalculate-devel libxml2-devel jemalloc-devel
+
+	jemalloc
+)
+makedepends="${makedepends[@]}"
+echo $makedepends
+depends="libwebp libjxl libsndfile libqalculate"
+short_desc="Noctalia desktop shell"
+maintainer="askoth <askoth@gmail.com>"
+license="MIT"
+homepage="https://github.com/noctalia-dev/noctalia"
+changelog="https://github.com/noctalia-dev/noctalia/releases"
+
+do_fetch() {
+	rm -rf ${wrksrc}
+	git clone https://github.com/noctalia-dev/noctalia ${wrksrc}
+	cd ${wrksrc}
+	git checkout ${_gitrev}
+}
+
+do_configure() {
+	just configure release
+	meson configure build-release -Dnative_optimizations=true -Dprefix=/usr
+}
+
+do_build() {
+	just build release
+}
+
+do_install() {
+	# Install the selected build mode. This does not build or reconfigure.
+	just install release
+	vbin build-release/noctalia
+	mkdir -p "${DESTDIR}/usr/share/noctalia"
+	cp -r assets "${DESTDIR}/usr/share/noctalia/"
+}
