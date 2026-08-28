@@ -1,0 +1,43 @@
+# Template file for 'noctalia-greeter'
+pkgname=noctalia-greeter
+version=1.2.1
+revision=1
+archs="x86_64"
+_gitrev="bf5feefee3d90922952c1850eebdf93d1c0c7f01"  # tag v1.2.1
+build_style=meson
+hostmakedepends="git pkg-config"
+makedepends="
+ cairo-devel
+ fontconfig-devel
+ freetype-devel
+ glib-devel
+ harfbuzz-devel
+ libepoxy-devel
+ libinput-devel
+ libglvnd-devel
+ librsvg-devel
+ libwebp-devel
+ libxkbcommon-devel
+ MesaLib-devel
+ json-c++
+ pango-devel
+ stb
+ tomlplusplus-devel
+ wayland-devel
+ wayland-protocols
+ wlroots-devel
+"
+depends="dbus greetd"
+rdepends="polkit"
+short_desc="Minimal login greeter for greetd, in Noctalia style"
+maintainer="askoth <askoth@gmail.com>"
+license="MIT"
+homepage="https://github.com/noctalia-dev/noctalia-greeter"
+changelog="https://github.com/noctalia-dev/noctalia-greeter/tags"
+
+do_fetch() {
+	rm -rf ${wrksrc}
+	git clone https://github.com/noctalia-dev/noctalia-greeter ${wrksrc}
+	cd ${wrksrc}
+	git checkout ${_gitrev}
+}
