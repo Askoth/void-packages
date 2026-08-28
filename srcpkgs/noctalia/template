@@ -1,9 +1,9 @@
 # Template file for 'noctalia'
 pkgname=noctalia
-version=5.0.0.beta.9
+version=5.0.0.beta.10
 revision=1
 archs="x86_64"
-_gitrev="a064c063f204518619b8c032c944138a0349966b"  # tag 5.0.0-beta.9
+_gitrev="74e6c2790dd8f39bf496e90e479a9ae370846eed"  # tag 5.0.0-beta.10
 build_style=meson
 hostmakedepends="git just"
 makedepends=(
