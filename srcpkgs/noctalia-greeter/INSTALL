@@ -1,0 +1,20 @@
+case "$ACTION" in
+post)
+	# Portable system setup (see upstream PACKAGING.md): creates
+	# /var/lib/noctalia-greeter (0750, chowned to the greetd session user),
+	# writes the default greeter.toml/sync.toml, and adds the elogind PAM
+	# line to /etc/pam.d/greetd. All steps are idempotent.
+	#
+	# If the greetd session user cannot be resolved yet (greetd not
+	# configured), this degrades gracefully; after configuring greetd,
+	# re-run it once:
+	#   sudo /usr/bin/bash /usr/share/noctalia-greeter/setup_greeter_system.sh
+	#
+	# Then point greetd at the session wrapper in /etc/greetd/config.toml:
+	#   command = "/usr/bin/noctalia-greeter-session"
+	# and restart the service:  sudo sv restart greetd
+	#
+	# `noctalia-greeter-print-greetd-config` prints a ready-to-paste block.
+	usr/bin/bash usr/share/noctalia-greeter/setup_greeter_system.sh || :
+	;;
+esac
