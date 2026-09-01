@@ -1,9 +1,9 @@
 # Template file for 'noctalia-greeter'
 pkgname=noctalia-greeter
-version=1.2.1
+version=1.3.0
 revision=1
 archs="x86_64"
-_gitrev="bf5feefee3d90922952c1850eebdf93d1c0c7f01"  # tag v1.2.1
+_gitrev="b4e668d4f8aada549d5c990c3a18458fae8be6b9"  # tag v1.3.0
 build_style=meson
 hostmakedepends="git pkg-config"
 makedepends="
