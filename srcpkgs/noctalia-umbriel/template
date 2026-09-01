@@ -1,0 +1,43 @@
+# Template file for 'umbriel'
+pkgname=noctalia-umbriel
+version=0.0.0
+revision=1
+archs="x86_64"
+_gitrev="11c6aca1743db519b1b39c79fa6e24b7f6b1ccde"  # no tags yet
+build_style=meson
+hostmakedepends="git pkg-config"
+makedepends="
+cmake
+ninja
+pkg-config
+wayland-devel
+wlroots0.20-devel
+libxkbcommon-devel
+libinput-devel
+pixman-devel
+libdrm-devel
+libglvnd-devel
+libgbm-devel
+lcms2-devel
+cairo-devel
+pango-devel
+tomlplusplus-devel
+json-c++
+jemalloc-devel
+"
+depends=""
+short_desc="Umbriel is a Wayland compositor designed for daily use"
+# jemalloc is optional but recommended on glibc: it returns freed memory to the OS promptly and bounds heap fragmentation in long-running sessions.
+configure_args="-Djemalloc=enabled"
+maintainer="askoth <askoth@gmail.com>"
+license="MIT"
+homepage="https://github.com/noctalia-dev/umbriel"
+# no changelog nor versioning yet
+#changelog="https://github.com/noctalia-dev/umbriel"
+
+do_fetch() {
+	rm -rf ${wrksrc}
+	git clone https://github.com/noctalia-dev/umbriel.git ${wrksrc}
+	cd ${wrksrc}
+	git checkout ${_gitrev}
+}
