@@ -1,0 +1,25 @@
+# Template file for 'llamacpp'
+pkgname=llamacpp-vulkan
+version=0.0.10087
+revision=1
+archs="x86_64"
+_gitrev="fb0e6b621917488d623437349fb5361e0ac21c70"  # tag not 0.1.0 yet
+build_style=cmake
+hostmakedepends="git"
+makedepends="vulkan-loader-devel shaderc SPIRV-Tools-devel SPIRV-Headers"
+configure_args="-DGGML_VULKAN=1"
+depends=""
+short_desc="LLM (and VLM) inference engine - vulkan build"
+maintainer="askoth <askoth@gmail.com>"
+license="MIT"
+homepage="https://github.com/ggml-org/llama.cpp"
+changelog="https://github.com/ggml-org/llama.cpp/releases"
+
+do_fetch() {
+	rm -rf ${wrksrc}
+	git clone https://github.com/ggml-org/llama.cpp.git ${wrksrc}
+	cd ${wrksrc}
+	git checkout ${_gitrev}
+}
+
+
