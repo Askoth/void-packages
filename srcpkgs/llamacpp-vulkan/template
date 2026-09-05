@@ -1,9 +1,9 @@
 # Template file for 'llamacpp'
 pkgname=llamacpp-vulkan
-version=0.0.10087
+version=0.0.10818
 revision=1
 archs="x86_64"
-_gitrev="fb0e6b621917488d623437349fb5361e0ac21c70"  # tag not 0.1.0 yet
+_gitrev="4d9176092d00586775af140581bb0b558ddc4389"  # tag above 0.4.0
 build_style=cmake
 hostmakedepends="git"
 makedepends="vulkan-loader-devel shaderc SPIRV-Tools-devel SPIRV-Headers"
