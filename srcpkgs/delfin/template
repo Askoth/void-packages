@@ -1,18 +1,22 @@
 # Template file for 'delfin'
 pkgname=delfin
 version=0.4.8
-revision=1
+revision=2
 archs="x86_64"
 build_style=meson
-#build_wrksrc="delfin-0.4.8"
+_gitrev="ca81d37496"
 configure_args="-Dprofile=release -Dflatpak=false"
-hostmakedepends="pkg-config"
+hostmakedepends="pkg-config git"
 makedepends="ninja gtk4-devel libadwaita-devel mpv-devel rust cargo"
 depends="gtk4 libadwaita mpv-devel"
-short_desc="Native GTK4 Jellyfin media player"
+short_desc="Native GTK4 Jellyfin media player - fork from Fisch"
 maintainer="askoth <askoth@gmail.com>"
 license="GPL-3.0-or-later"
 homepage="https://delfin.avery.cafe/"
-changelog="https://codeberg.org/avery42/delfin/releases"
-distfiles="https://codeberg.org/avery42/delfin/releases/download/v${version}/delfin-flatpak-dist-v${version}.tar.xz"
-checksum=56d6f51ceab544f5ec077e79b946df643f927155f242f17ad54005ecc12e611f
+
+do_fetch() {
+	rm -rf ${wrksrc}
+	git clone https://codeberg.org/askoth/delfin.git ${wrksrc}
+	cd ${wrksrc}
+	git checkout ${_gitrev}
+}
