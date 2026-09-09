@@ -1,9 +1,9 @@
 # Template file for 'umbriel'
 pkgname=noctalia-umbriel
 version=0.0.0
-revision=2
+revision=3
 archs="x86_64"
-_gitrev="07994c03c16ab402a9cdafd199bdf4fb6e77c925"  # no tags yet
+_gitrev="9929e70c92f1ab0ac65307192d0e0f4e4f782a0a"  # no tags yet
 build_style=meson
 hostmakedepends="git pkg-config"
 makedepends="
