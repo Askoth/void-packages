@@ -1,9 +1,8 @@
 # Template file for 'noctalia'
 pkgname=noctalia
-version=5.0.1
+version=5.1.0
 revision=1
 archs="x86_64"
-_gitrev="f95e95cafde8c23f1d3a62b969e2b5717c96d741"  # tag 5.0.1
 build_style=meson
 # --buildtype=release matters here beyond speed. noctalia's meson.build gates behavior on it
 # -Dnative_optimizations=true is your only custom option — it turns on -march=native -mtune=native
@@ -54,10 +53,5 @@ maintainer="askoth <askoth@gmail.com>"
 license="MIT"
 homepage="https://github.com/noctalia-dev/noctalia"
 changelog="https://github.com/noctalia-dev/noctalia/releases"
-
-do_fetch() {
-	rm -rf ${wrksrc}
-	git clone https://github.com/noctalia-dev/noctalia ${wrksrc}
-	cd ${wrksrc}
-	git checkout ${_gitrev}
-}
+distfiles="https://github.com/noctalia-dev/noctalia/releases/download/v${version}/noctalia-v${version}.tar.gz"
+checksum=c85a9bd2ee272ba92c5f0a785183fb721664f27c065157a094698088901e0816
