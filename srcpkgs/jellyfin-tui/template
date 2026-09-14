@@ -1,6 +1,6 @@
 # Template file for 'jellyfin-tui'
 pkgname=jellyfin-tui
-version=1.5.2
+version=1.6.0
 revision=1
 archs="x86_64"
 build_style=cargo
@@ -12,7 +12,7 @@ maintainer="askoth <askoth@gmail.com>"
 license="GPL-3.0-or-later"
 homepage="https://github.com/dhonus/jellyfin-tui"
 changelog="https://github.com/dhonus/jellyfin-tui/releases"
-_gitrev="5b058b4f71444f5a41608f7d95c898ede0016406"	# tag v1.5.2
+_gitrev="47e873f9fc2bbd112834c68f25109a43331c6fc0"
 
 do_fetch() {
 	rm -rf ${wrksrc}
