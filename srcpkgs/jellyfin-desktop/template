@@ -1,19 +1,24 @@
 # Template file for 'jellyfin-desktop'
 pkgname=jellyfin-desktop
 version=2.0.0
-revision=2
+revision=3
 build_style=cmake
 build_helper="qmake6"
 configure_args="-DCHECK_FOR_UPDATES=OFF"
-hostmakedepends="python3 qt6-base"
+hostmakedepends="git python3 qt6-base"
 makedepends="qt6-webchannel-devel qt6-webengine-devel mpvqt-devel libcec-devel SDL2-devel"
 short_desc="Jellyfin desktop client"
 maintainer="classabbyamp <void@placeviolette.net>"
 license="GPL-2.0-or-later"
-homepage="https://github.com/jellyfin-archive/jellyfin-desktop-qt"
-changelog="https://github.com/jellyfin-archive/jellyfin-desktop-qt/releases"
-distfiles="https://github.com/jellyfin-archive/jellyfin-desktop-qt/archive/refs/tags/v${version}.tar.gz"
-checksum=11ba0a7f4f344dc076b9f234193f93684a5621a100607298dfc2d14092b525d5
+homepage="https://github.com/jellyfin/jellyfin-desktop"
+changelog="https://github.com/jellyfin/jellyfin-desktop/releases"
+_gitrev="2cb4a4456fd29b5b62d825ef0e5df93ed6913328"  # nativeshell profile-level injection fix (first-load race)
+do_fetch() {
+	rm -rf ${wrksrc}
+	git clone https://github.com/jellyfin/jellyfin-desktop.git ${wrksrc}
+	cd ${wrksrc}
+	git checkout ${_gitrev}
+}
 replaces="jellyfin-media-player>=0"
 
 if [ "$XBPS_WORDSIZE$XBPS_WORDSIZE" != "64$XBPS_TARGET_WORDSIZE" ]; then
