@@ -1,0 +1,30 @@
+# Template file for 'luau'
+pkgname=luau
+version=0.738
+revision=1
+archs="x86_64"
+build_style=cmake
+hostmakedepends="git"
+short_desc="Gradually typed embeddable scripting language derived from Lua"
+maintainer="askoth <askoth@gmail.com>"
+license="MIT"
+homepage="https://github.com/luau-lang/luau"
+changelog="https://github.com/luau-lang/luau/releases"
+
+_gitrev="c54f558b4d5748ab0658610b8ce0c432053e41eb"  # tag 0.738
+do_fetch() {
+	rm -rf ${wrksrc}
+	git clone https://github.com/luau-lang/luau ${wrksrc}
+	cd ${wrksrc}
+	git checkout ${_gitrev}
+}
+
+configure_args="-DLUAU_BUILD_TESTS=OFF"
+
+do_install() {
+	cd build
+	for bin in luau luau-analyze luau-ast luau-reduce luau-compile luau-bytecode
+	do
+		install -Dm755 ${bin} ${DESTDIR}/usr/bin/${bin}
+	done
+}
