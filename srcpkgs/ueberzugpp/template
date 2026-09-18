@@ -1,0 +1,50 @@
+# Template file for 'ueberzugpp'
+pkgname=ueberzugpp
+version=2.9.10
+revision=1
+archs="x86_64"
+build_style=cmake
+hostmakedepends="git"
+makedepends="
+	chafa-devel
+	cli11
+	extra-cmake-modules
+	fmt-devel
+	json-c++
+	libopencv-devel
+	libsixel-devel
+	libvips-devel
+	openssl-devel
+	pkg-config
+	range-v3
+	spdlog
+	tbb-devel
+	wayland-devel
+	wayland-protocols
+"
+depends="
+	libchafa
+	fmt
+	libsixel
+	libxcb
+	libopencv
+	openssl
+	range-v3
+	spdlog
+	libvips
+	wayland
+"
+configure_args="-DENABLE_WAYLAND=ON -DENABLE_X11=OFF"
+short_desc="Display images inside a terminal"
+maintainer="askoth <askoth@gmail.com>"
+license="GPL-3.0"
+homepage="https://github.com/jstkdng/ueberzugpp"
+changelog="https://github.com/jstkdng/ueberzugpp/releases"
+_gitrev="9eedfdc355653fd80beed0ae1413b6a4dff38309"  # tag v2.9.10
+
+do_fetch() {
+	rm -rf ${wrksrc}
+	git clone https://github.com/jstkdng/ueberzugpp ${wrksrc}
+	cd ${wrksrc}
+	git checkout ${_gitrev}
+}
