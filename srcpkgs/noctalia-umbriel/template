@@ -36,8 +36,5 @@ homepage="https://github.com/noctalia-dev/umbriel"
 #changelog="https://github.com/noctalia-dev/umbriel"
 
 do_fetch() {
-	rm -rf ${wrksrc}
-	git clone https://github.com/noctalia-dev/umbriel.git ${wrksrc}
-	cd ${wrksrc}
-	git checkout ${_gitrev}
+	git clone --single-branch --depth 1 --revision="${_gitrev}" https://github.com/noctalia-dev/umbriel.git ${wrksrc}
 }
