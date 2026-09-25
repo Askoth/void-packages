@@ -1,0 +1,23 @@
+# Template file for 'xdg-desktop-portal-umbriel'
+pkgname=xdg-desktop-portal-umbriel
+version=0.0.0+44
+revision=1
+build_style=meson
+hostmakedepends="git pkg-config wayland-devel"
+makedepends="pipewire-devel dbus-devel wayland-devel libdrm-devel libgbm-devel
+ tomlplusplus-devel cairo-devel gtk4-devel sdbus-c++-devel json-c++"
+depends="xdg-desktop-portal"
+short_desc="xdg-desktop-portal backend for Umbriel"
+maintainer=""
+license="MIT"
+homepage="https://noctalia.dev"
+_git_url="https://github.com/noctalia-dev/xdg-desktop-portal-umbriel.git"
+_git_commit="ee380d66984a45310ef48a283ad806ebab752788"
+
+do_fetch() {
+    git clone --single-branch --depth 1 --revision="${_git_commit}" "${_git_url}" "${wrksrc}"
+}
+
+post_install() {
+    vlicense LICENSE
+}
