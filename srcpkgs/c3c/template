@@ -1,0 +1,20 @@
+# Template file for 'c3c'
+pkgname=c3c
+version=0.8.5
+revision=1
+archs="x86_64"
+build_style=cmake
+hostmakedepends="git"
+makedepends="llvm21-devel lld21-devel libxml2-devel libzstd-devel"
+depends=""
+short_desc="C3 Language compiler (c3c)"
+maintainer="askoth <askoth@gmail.com>"
+license="MIT, LGPL-3"
+homepage="https://github.com/c3lang/c3c"
+changelog="https://github.com/c3lang/c3c/releases"
+
+_gitrev="8a8ddeeec237bfe7e2f91074c1695dca4baaeec9"  # tag latest-prerelease-tag (C3 0.8.5 dev)
+
+do_fetch() {
+	git clone --single-branch --depth 1 --revision="${_gitrev}" https://github.com/c3lang/c3c ${wrksrc}
+}
