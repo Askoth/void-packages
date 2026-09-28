@@ -54,4 +54,4 @@ license="MIT"
 homepage="https://github.com/noctalia-dev/noctalia"
 changelog="https://github.com/noctalia-dev/noctalia/releases"
 distfiles="https://github.com/noctalia-dev/noctalia/releases/download/v${version}/noctalia-v${version}.tar.gz"
-checksum=c85a9bd2ee272ba92c5f0a785183fb721664f27c065157a094698088901e0816
+checksum=dd759ba43b1a6122a4efb9c33543b4547519d50a817f3bc8688e282bfd916804
