@@ -1,6 +1,6 @@
 # Template file for 'noctalia'
 pkgname=noctalia
-version=5.1.0
+version=5.2.0
 revision=1
 archs="x86_64"
 build_style=meson
