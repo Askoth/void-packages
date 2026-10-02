@@ -1,7 +1,7 @@
 # Template file for 'noctalia'
 pkgname=noctalia-baseline
 version=5.2.1
-revision=1
+revision=2
 archs="x86_64"
 build_style=meson
 hostmakedepends="git just"
@@ -45,6 +45,7 @@ makedepends="
 	jemalloc
 "
 depends="libwebp libjxl libsndfile libqalculate"
+configure_args="--buildtype=release -Dnative_optimizations=false -Dc_args=-march=core2 -Dcpp_args=-march=core2"
 short_desc="Noctalia desktop shell"
 maintainer="askoth <askoth@gmail.com>"
 license="MIT"
