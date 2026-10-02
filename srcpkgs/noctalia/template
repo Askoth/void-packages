@@ -1,6 +1,6 @@
 # Template file for 'noctalia'
 pkgname=noctalia
-version=5.2.0
+version=5.2.1
 revision=1
 archs="x86_64"
 build_style=meson
@@ -54,4 +54,4 @@ license="MIT"
 homepage="https://github.com/noctalia-dev/noctalia"
 changelog="https://github.com/noctalia-dev/noctalia/releases"
 distfiles="https://github.com/noctalia-dev/noctalia/releases/download/v${version}/noctalia-v${version}.tar.gz"
-checksum=dd759ba43b1a6122a4efb9c33543b4547519d50a817f3bc8688e282bfd916804
+checksum=fddff2d78677b8889709c8b2e707896fce1b79d24cb9a81d36f3be6aa66e58bb
