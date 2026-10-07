@@ -1,12 +1,13 @@
 # Template file for 'llamacpp'
 pkgname=llamacpp-vulkan
 version=0.0.10818
-revision=2
+revision=3
 archs="x86_64"
-_gitrev="4d9176092d00586775af140581bb0b558ddc4389"  # tag above 0.4.0
+_gitrev="4d9176092d00586775af140581bb0b558ddc4389"
+_tag="${version##*.}"
 build_style=cmake
-hostmakedepends="git"
-makedepends="vulkan-loader-devel shaderc SPIRV-Tools-devel SPIRV-Headers openssl-devel"
+hostmakedepends="git curl tar"
+makedepends="nodejs vulkan-loader-devel shaderc SPIRV-Tools-devel SPIRV-Headers openssl-devel"
 configure_args="-DGGML_VULKAN=1 -DLLAMA_OPENSSL=ON"
 depends=""
 short_desc="LLM (and VLM) inference engine - vulkan build"
@@ -15,11 +16,18 @@ license="MIT"
 homepage="https://github.com/ggml-org/llama.cpp"
 changelog="https://github.com/ggml-org/llama.cpp/releases"
 
+_unpack_ui() {
+	ui="${wrksrc}/tools/ui/dist/"
+	mkdir -p "$ui"
+	curl -sfL https://huggingface.co/buckets/ggml-org/llama-ui/resolve/b${_tag}/dist.tar.gz -o "$ui/dist.tar.gz"
+	tar xf ${wrksrc}/tools/ui/dist/dist.tar.gz -C ${wrksrc}/tools/ui/dist
+	rm ${wrksrc}/tools/ui/dist/dist.tar.gz
+}
+
 do_fetch() {
-	rm -rf ${wrksrc}
-	git clone https://github.com/ggml-org/llama.cpp.git ${wrksrc}
-	cd ${wrksrc}
-	git checkout ${_gitrev}
+	git clone --single-branch --depth 1 --revision="${_gitrev}" https://github.com/ggml-org/llama.cpp.git ${wrksrc}
+
+	_unpack_ui
 }
 
 
