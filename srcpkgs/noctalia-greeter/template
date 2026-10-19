@@ -1,12 +1,13 @@
 # Template file for 'noctalia-greeter'
 pkgname=noctalia-greeter
-version=1.6.0
+version=1.7.0
 revision=1
 archs="x86_64"
-_gitrev="44337ecba043749c29de6f3d563315b91987a908"
+_gitrev="af0bf4b1e1c40738db917b04c9c0563b4f718953"
 build_style=meson
 hostmakedepends="git pkg-config"
 makedepends="
+ libjxl-devel
  cairo-devel
  fontconfig-devel
  freetype-devel
@@ -36,8 +37,5 @@ homepage="https://github.com/noctalia-dev/noctalia-greeter"
 changelog="https://github.com/noctalia-dev/noctalia-greeter/tags"
 
 do_fetch() {
-	rm -rf ${wrksrc}
-	git clone https://github.com/noctalia-dev/noctalia-greeter ${wrksrc}
-	cd ${wrksrc}
-	git checkout ${_gitrev}
+	git clone --single-branch --depth 1 --revision="${_gitrev}" https://github.com/noctalia-dev/noctalia-greeter  ${wrksrc}
 }
