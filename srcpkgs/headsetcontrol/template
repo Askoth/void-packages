@@ -1,9 +1,9 @@
 # Template file for 'headsetcontrol'
 pkgname=headsetcontrol
-version=4.0.0
+version=4.2.0
 revision=1
 archs="x86_64"
-_gitrev="7868482a2494eeea80ad2245e95f6bb84b6cb336"  # tag 4.0.0
+_gitrev="91ee690a5e302a10a6f4f75a46be05846a38a3b0"
 build_style=cmake
 hostmakedepends="git"
 makedepends="hidapi-devel"
@@ -15,9 +15,6 @@ homepage="https://github.com/Sapd/HeadsetControl"
 changelog="https://github.com/Sapd/HeadsetControl/releases"
 
 do_fetch() {
-	rm -rf ${wrksrc}
-	git clone https://github.com/Sapd/HeadsetControl.git ${wrksrc}
-	cd ${wrksrc}
-	git checkout ${_gitrev}
+	git clone --single-branch --depth 1 --revision="${_gitrev}" https://github.com/Sapd/HeadsetControl.git ${wrksrc}
 }
 
