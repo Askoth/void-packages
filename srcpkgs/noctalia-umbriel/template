@@ -1,9 +1,9 @@
 # Template file for 'umbriel'
 pkgname=noctalia-umbriel
-version=0.0.0+1061
+version=0.0.0+1626
 revision=1
 archs="x86_64"
-_gitrev="4b28e8a02a1ed64fdf5ac06c20a0049eeb83f299"  # no tags yet
+_gitrev="bc10febde287a6430d6af9dd6bada478beeb0ae5"  # no tags yet
 build_style=meson
 hostmakedepends="git pkg-config"
 makedepends="
@@ -24,6 +24,7 @@ pango-devel
 tomlplusplus-devel
 json-c++
 jemalloc-devel
+libei-devel
 "
 depends=""
 short_desc="Umbriel is a Wayland compositor designed for daily use"
